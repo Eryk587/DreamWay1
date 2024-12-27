@@ -1,13 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Your Tasks</h2>
-<ul>
-    {% for task in tasks %}
-    <li>
-        <a href="{% url 'task_detail' task.py %}">{{ task.title }}</a> - {{ task.status }}
-    </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'task_add' %}">Add New Task</a>
+<h2 class="mb-4">Moje Zadania</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Status</th>
+            <th>Termin</th>
+            <th>Kategoria</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.get_status_display }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>{{ task.category.name }}</td>
+            <td>
+                <a href="{% url 'task_detail' task.pk %}" class="btn btn-sm btn-primary">Szczegóły</a>
+                <a href="{% url 'task_edit' task.pk %}" class="btn btn-sm btn-warning">Edytuj</a>
+                <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Usuń</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Brak zadań do wyświetlenia.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'task_add' %}" class="btn btn-success">Dodaj nowe zadanie</a>
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Szczegóły zadania</h2>
+<div class="card">#zawartisc bootsrap
+    <div class="card-body">
+        <h3 class="card-title">{{ object.title }}</h3>
+        <p class="card-text">
+            <strong>Opis:</strong> {{ object.description|default:"Brak opisu" }}
+        </p>
+        <p class="card-text">
+            <strong>Status:</strong> {{ object.get_status_display }}
+        </p>
+        <p class="card-text">
+            <strong>Termin:</strong> {{ object.due_date|date:"d-m-Y" }}
+        </p>
+        <p class="card-text">
+            <strong>Kategoria:</strong> {{ object.category.name|default:"Nieprzypisana" }}
+        </p>
+        <a href="{% url 'task_edit' object.pk %}" class="btn btn-warning">Edytuj</a>
+        <a href="{% url 'task_delete' object.pk %}" class="btn btn-danger">Usuń</a>
+        <a href="{% url 'task_list' %}" class="btn btn-secondary">Powrót do listy</a>
+    </div>
+</div>
+{% endblock %}
