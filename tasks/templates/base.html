@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>DreamWay1</title>
+
 </head>
 <body>
     <h1>DreamWay1 - Task Manager</h1>
     {% block content %}{% endblock %}
+<nav>
+    {% if user.is_authenticated %}
+        Witaj, {{ user.username }}!
+        <a href="{% url 'logout' %}">Wyloguj się</a>
+    {% else %}
+        <a href="{% url 'login' %}">Zaloguj się</a>
+        <a href="{% url 'register' %}">Zarejestruj się</a>
+    {% endif %}
+</nav>
+
 </body>
 </html>
