@@ -2,6 +2,29 @@
 
 {% block content %}
 <h2 class="mb-4">Moje Zadania</h2>
+    <form method="get" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <select name="status" class="form-select">
+                <option value="">Wszystkie statusy</option>
+                <option value="todo">Do zrobienia</option>
+                <option value="in_progress">W trakcie</option>
+                <option value="done">Zakończone</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-select">
+                <option value="">Wszystkie kategorie</option>
+                {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Filtruj</button>
+        </div>
+    </div>
+</form>
 <table class="table table-striped">
     <thead>
         <tr>
